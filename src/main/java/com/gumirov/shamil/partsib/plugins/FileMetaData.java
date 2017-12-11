@@ -2,12 +2,17 @@ package com.gumirov.shamil.partsib.plugins;
 
 import java.io.InputStream;
 import java.util.Map;
+import org.apache.camel;
 
 /**
  * (c) 2017 by Shamil Gumirov (shamil@gumirov.com).<br/>
  * Date: 22/2/2017 Time: 01:04<br/>
  */
 public class FileMetaData {
+  /**
+   * This constant is to use in plugins to get rid of camel-core dependency.
+   */
+  public final static String FILENAME_HEADER = Exchange.FILE_NAME;
   public final String senderId;
   public final String filename;
   public InputStream is;
