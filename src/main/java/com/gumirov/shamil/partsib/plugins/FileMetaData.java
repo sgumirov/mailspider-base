@@ -2,7 +2,7 @@ package com.gumirov.shamil.partsib.plugins;
 
 import java.io.InputStream;
 import java.util.Map;
-import org.apache.camel;
+import org.apache.camel.*;
 
 /**
  * (c) 2017 by Shamil Gumirov (shamil@gumirov.com).<br/>
