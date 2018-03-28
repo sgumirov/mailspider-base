@@ -19,7 +19,7 @@ public class FileMetaData {
   /**
    * Key for header to be used when plugin creates temp file to be deleted when not used. Value can be of type: File,
    * List&lt;String&gt;.
-   * @since 1.8
+   * @since 1.9
    */
   public static final String TEMP_FILE_HEADER = "MAILSPIDER_PLUGIN_TEMP_FILE";
   public final String senderId;

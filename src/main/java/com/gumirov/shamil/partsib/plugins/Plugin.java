@@ -8,12 +8,12 @@ import java.io.InputStream;
 /**
  * Plugin can change only file contents via returning new InputStream value from processFile().
  * <p>
- *   Note: since version 1.8 if a plugin creates temporary file to be deleted later it must add it to queue
+ *   Note: since version 1.9 if a plugin creates temporary file to be deleted later it must add it to queue
  *   using {@link FileMetaData#addFileToDelete(File)}
  * </p>
  * <p>(c) 2017 by Shamil Gumirov (shamil@gumirov.com).
  * <p>
- *   @since 1.8 Throws Exception in case of error.
+ *   @since 1.9 Throws Exception in case of error.
  * </p>
  */
 public interface Plugin {
