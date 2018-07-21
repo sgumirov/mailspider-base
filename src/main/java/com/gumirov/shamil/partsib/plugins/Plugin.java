@@ -3,6 +3,8 @@ package com.gumirov.shamil.partsib.plugins;
 import org.slf4j.Logger;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 /**
@@ -18,7 +20,6 @@ import java.io.InputStream;
  */
 @SuppressWarnings("unused")
 public interface Plugin {
-
   /**
    * Processes file and maybe replaces its content with new one.
    * <p>In case of recoverable error write log entry and return null, in case of fatal error throw exception. Execution 
@@ -30,29 +31,50 @@ public interface Plugin {
    */
   Result processFile(FileMetaData metadata, Logger log) throws Exception;
 
-  interface Result {
+  abstract class Result {
+    public static Result create(String filename){
+      return new FileResult(new File(filename));
+    }
+    public static Result create(InputStream is){
+      return new StreamResult(is);
+    }
+    public static Result create(File file){
+      return new FileResult(file);
+    }
+    public abstract Object getResult();
+    public abstract InputStream getInputStream() throws FileNotFoundException;
   }
 
-  class FileResult implements Result {
+  class FileResult extends Result {
     private final File file;
 
     public FileResult(File file) {
       this.file = file;
     }
 
-    File getResult() {
+    public File getResult() {
       return file;
+    }
+
+    @Override
+    public InputStream getInputStream() throws FileNotFoundException {
+      return new FileInputStream(file);
     }
   }
 
-  class StreamResult implements Result {
+  class StreamResult extends Result {
     private final InputStream is;
 
     public StreamResult(InputStream is) {
       this.is = is;
     }
 
-    InputStream getResult() {
+    public InputStream getResult() {
+      return is;
+    }
+
+    @Override
+    public InputStream getInputStream() {
       return is;
     }
   }
