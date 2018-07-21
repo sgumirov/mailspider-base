@@ -16,6 +16,7 @@ import java.io.InputStream;
  *   @since 1.9 Throws Exception in case of error.
  * </p>
  */
+@SuppressWarnings("unused")
 public interface Plugin {
 
   /**
@@ -25,7 +26,34 @@ public interface Plugin {
    * @param metadata in params, see {@link FileMetaData} class for details. In/out param: possible to add new values.
    * @param log logger to use
    * @return new file contents, or null if no changes needed
-   * @throws Throwable if something wrong. Actually in case of trouble it's better to let it fall.
+   * @throws Exception if something wrong. Actually in case of trouble it's better to let it fall.
    */
-  InputStream processFile(FileMetaData metadata, Logger log) throws Exception;
+  Result processFile(FileMetaData metadata, Logger log) throws Exception;
+
+  interface Result {
+  }
+
+  class FileResult implements Result {
+    private final File file;
+
+    public FileResult(File file) {
+      this.file = file;
+    }
+
+    File getResult() {
+      return file;
+    }
+  }
+
+  class StreamResult implements Result {
+    private final InputStream is;
+
+    public StreamResult(InputStream is) {
+      this.is = is;
+    }
+
+    InputStream getResult() {
+      return is;
+    }
+  }
 }
