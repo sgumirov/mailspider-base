@@ -11,11 +11,15 @@ import org.apache.camel.*;
  * (c) 2017 by Shamil Gumirov (shamil@gumirov.com).<br/>
  * Date: 22/2/2017 Time: 01:04<br/>
  */
+@SuppressWarnings("unused")
 public class FileMetaData {
   /**
-   * This constant is to use in plugins to get rid of camel-core dependency.
+   * File name Camel header key.
+   * <p>Note: this constant is to be used in plugins implementation to get rid of camel-core dependency.
+   * @since 1.0
    */
   public final static String FILENAME_HEADER = Exchange.FILE_NAME;
+
   /**
    * Key for header to be used when plugin creates temp file to be deleted when not used. Value can be of type: File,
    * List&lt;String&gt;.
@@ -25,6 +29,7 @@ public class FileMetaData {
   public final String senderId;
   public final String filename;
   public InputStream is;
+
   /**
    * File headers such as content-type if known. Please refer to docs on each endpoint (email could have more
    * headers than FTP for example. Could be null.
@@ -45,7 +50,7 @@ public class FileMetaData {
   }
 
   /**
-   * Adds File to pipeline delete queue
+   * Add File to pipeline delete queue.
    * @param f File to delete when not needed to free disk space.
    */
   public void addFileToDelete(File f) {
